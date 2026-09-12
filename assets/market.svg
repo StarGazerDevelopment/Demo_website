@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="mbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbf9f2"/>
+      <stop offset="1" stop-color="#e6e0cd"/>
+    </linearGradient>
+    <linearGradient id="crate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dcbe93"/>
+      <stop offset="1" stop-color="#bf9a68"/>
+    </linearGradient>
+    <filter id="mgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".82" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#mbg)"/>
+
+  <!-- awning -->
+  <path d="M90 220h1020l-70 130H160z" fill="#5b7f3f" opacity=".85"/>
+  <g fill="#f7f3e6" opacity=".85">
+    <path d="M176 220h86l-56 130h-52z"/>
+    <path d="M362 220h86l-32 130h-64z"/>
+    <path d="M548 220h86l-10 130h-74z"/>
+    <path d="M734 220h86l12 130h-84z"/>
+    <path d="M920 220h86l34 130h-94z"/>
+  </g>
+  <path d="M160 350h880l26 40H134z" fill="#4c6b34" opacity=".7"/>
+  <rect x="86" y="212" width="1032" height="14" rx="7" fill="#8a6a3c"/>
+
+  <!-- table -->
+  <rect x="120" y="520" width="960" height="26" rx="8" fill="#c9a97a"/>
+  <rect x="150" y="546" width="22" height="190" fill="#b08f60"/>
+  <rect x="1028" y="546" width="22" height="190" fill="#b08f60"/>
+
+  <!-- crates of produce -->
+  <g>
+    <rect x="170" y="410" width="230" height="110" rx="10" fill="url(#crate)"/>
+    <circle cx="212" cy="404" r="34" fill="#c96a4a"/>
+    <circle cx="268" cy="396" r="38" fill="#d98a54"/>
+    <circle cx="326" cy="406" r="32" fill="#b8553f"/>
+    <circle cx="292" cy="374" r="30" fill="#cb7a48"/>
+  </g>
+  <g>
+    <rect x="440" y="410" width="230" height="110" rx="10" fill="url(#crate)"/>
+    <circle cx="482" cy="400" r="34" fill="#7f9a54"/>
+    <circle cx="540" cy="392" r="38" fill="#93a86a"/>
+    <circle cx="600" cy="402" r="32" fill="#6f8b47"/>
+    <ellipse cx="540" cy="358" rx="46" ry="18" fill="#8fae5f" transform="rotate(-14 540 358)"/>
+  </g>
+  <g>
+    <rect x="710" y="410" width="230" height="110" rx="10" fill="url(#crate)"/>
+    <circle cx="752" cy="402" r="32" fill="#e0b352"/>
+    <circle cx="806" cy="394" r="34" fill="#d59d3f"/>
+    <circle cx="862" cy="404" r="30" fill="#e6c374"/>
+    <circle cx="830" cy="368" r="26" fill="#c98f33"/>
+  </g>
+
+  <!-- loose sprays on the table -->
+  <ellipse cx="326" cy="508" rx="70" ry="16" fill="#7f9a54"/>
+  <ellipse cx="880" cy="508" rx="62" ry="14" fill="#93a86a"/>
+
+  <rect width="1200" height="800" filter="url(#mgrain)" opacity=".06"/>
+</svg>

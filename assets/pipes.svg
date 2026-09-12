@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f4ee"/>
+      <stop offset="1" stop-color="#e2ddd0"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8ad82"/>
+      <stop offset=".5" stop-color="#b8823f"/>
+      <stop offset="1" stop-color="#96662c"/>
+    </linearGradient>
+    <filter id="pgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#pbg)"/>
+  <rect x="0" y="620" width="800" height="180" fill="#d9d3c5" opacity=".5"/>
+
+  <!-- pipe run with elbows, drawn as one thick stroke -->
+  <path d="M110 640H300a92 92 0 0 0 92-92V360a92 92 0 0 1 92-92h206"
+        fill="none" stroke="url(#pipe)" stroke-width="46" stroke-linecap="round"/>
+  <path d="M110 640H300a92 92 0 0 0 92-92V360a92 92 0 0 1 92-92h206"
+        fill="none" stroke="#f2e2cd" stroke-width="12" stroke-linecap="round" opacity=".5"/>
+
+  <!-- flanges -->
+  <rect x="268" y="524" width="20" height="70" rx="8" fill="#8f6127"/>
+  <rect x="470" y="256" width="70" height="20" rx="8" fill="#8f6127"/>
+  <rect x="132" y="616" width="26" height="48" rx="10" fill="#8f6127"/>
+
+  <!-- valve wheel -->
+  <circle cx="676" cy="268" r="66" fill="none" stroke="#3c4250" stroke-width="16"/>
+  <path d="M676 202v132M610 268h132" stroke="#3c4250" stroke-width="12"/>
+  <circle cx="676" cy="268" r="18" fill="#3c4250"/>
+
+  <!-- drips -->
+  <circle cx="600" cy="430" r="12" fill="#7fa3b8" opacity=".7"/>
+  <circle cx="600" cy="486" r="8" fill="#7fa3b8" opacity=".45"/>
+
+  <rect width="800" height="800" filter="url(#pgrain)" opacity=".06"/>
+</svg>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alder Street Market — fruit, veg &amp; pantry</title>
+<meta name="description" content="A sample grocery homepage: what's in season, what's on the shelves, and boxes ready to collect.">
+<meta name="theme-color" content="#faf8ee">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235b7f3f'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='18' fill='%23fffaf3' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../demo-site.css">
+</head>
+<body data-theme="grocery">
+
+<header class="site-top">
+  <div class="shell-site site-top__inner">
+    <a class="site-brand" href="./"><span class="site-brand__mark" aria-hidden="true">A</span> Alder Street Market</a>
+    <nav class="site-links" aria-label="Sections">
+      <a href="#menu">On the shelves</a>
+      <a href="#gallery">In the aisles</a>
+      <a href="#visit">Visit us</a>
+    </nav>
+    <a class="s-btn s-btn--sm" href="#menu">What's in season</a>
+  </div>
+</header>
+
+<main>
+  <!-- ------------------------------------------------------------- hero -->
+  <section class="hero-site">
+    <div class="shell-site hero-site__grid">
+      <div>
+        <p class="s-kicker">Fruit, veg &amp; pantry · Open 7 days</p>
+        <h1 class="reveal">Fruit that still<br><em>smells like fruit.</em></h1>
+        <p class="hero-site__lede reveal" style="--delay:100ms">
+          Grown by people we know by name, on the shelf within a day of being
+          picked. Come in and squeeze something.
+        </p>
+        <div class="hero-site__actions reveal" style="--delay:180ms">
+          <a class="s-btn" href="#visit">Find the shop</a>
+          <a class="s-btn s-btn--ghost" href="#menu">What's in season</a>
+        </div>
+        <ul class="hero-site__facts reveal" style="--delay:240ms">
+          <li>Open seven days</li>
+          <li>Growers within an hour</li>
+          <li>Bring your own bags</li>
+        </ul>
+      </div>
+
+      <div class="hero-site__media reveal" style="--delay:120ms">
+        <img src="../../assets/market.svg" alt="Placeholder: a market stall of crates and produce" width="1200" height="800">
+        <div class="hero-site__badge">
+          <strong>4.7</strong>
+          <span>From 384 reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------- fact band -->
+  <div class="band" aria-hidden="true">
+    <div class="band__track">
+      <span class="band__item">In season now</span>
+      <span class="band__item">Local growers</span>
+      <span class="band__item">Refill station</span>
+      <span class="band__item">Home delivery</span>
+      <span class="band__item">Bulk bins</span>
+      <span class="band__item">Paper bags, always</span>
+    </div>
+  </div>
+
+  <!-- ---------------------------------------------------------- shelves -->
+  <section class="site-section" id="menu">
+    <div class="shell-site">
+      <div class="site-head">
+        <p class="s-kicker">On the shelves</p>
+        <h2 class="reveal">A short list, changing weekly</h2>
+        <p class="reveal" style="--delay:80ms">
+          What's below just landed. The rest is chalked up on the board by the door.
+        </p>
+      </div>
+
+      <div class="menu-grid" data-cascade>
+        <article class="menu-item">
+          <h3>Heirloom tomatoes<span class="menu-item__tag">Just in</span></h3>
+          <span class="price">6.50 / kg</span>
+          <p>Grown an hour up the road. Ask for a taste before you commit.</p>
+        </article>
+        <article class="menu-item">
+          <h3>Sourdough, baked here</h3>
+          <span class="price">8.00</span>
+          <p>Out of the oven at seven, usually gone by eleven.</p>
+        </article>
+        <article class="menu-item">
+          <h3>Seasonal fruit box</h3>
+          <span class="price">35</span>
+          <p>Whatever's best that week, packed up and ready to collect or delivered.</p>
+        </article>
+        <article class="menu-item">
+          <h3>Farm eggs, dozen</h3>
+          <span class="price">8.50</span>
+          <p>From a farm up the road. Bring the carton back if you remember.</p>
+        </article>
+        <article class="menu-item">
+          <h3>Milk, glass bottle</h3>
+          <span class="price">4.20</span>
+          <p>Local dairy. The bottle deposit comes off your next shop.</p>
+        </article>
+        <article class="menu-item">
+          <h3>Coffee beans, 250g</h3>
+          <span class="price">19</span>
+          <p>Roasted weekly, and we'll grind it however your kitchen needs it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------------------------------------------------- gallery -->
+  <section class="site-section site-section--alt" id="gallery">
+    <div class="shell-site">
+      <div class="site-head site-head--split">
+        <div>
+          <p class="s-kicker">In the aisles</p>
+          <h2 class="reveal">Wooden floors, full crates</h2>
+        </div>
+        <p class="reveal" style="--delay:80ms">
+          Three aisles, a refill station, and someone who'll tell you what to do with a quince.
+        </p>
+      </div>
+
+      <div class="gallery-wall" data-cascade>
+        <figure class="big">
+          <img src="../../assets/market.svg" alt="Placeholder: crates of produce at a stall" width="1200" height="800">
+          <figcaption>Saturday morning</figcaption>
+        </figure>
+        <figure class="tall">
+          <img src="../../assets/produce.svg" alt="Placeholder: a bowl of fruit and vegetables" width="800" height="800">
+          <figcaption>This week's boxes</figcaption>
+        </figure>
+        <figure>
+          <img src="../../assets/aisle.svg" alt="Placeholder: shelves of goods" width="1200" height="800">
+          <figcaption>The middle aisle</figcaption>
+        </figure>
+        <figure>
+          <img src="../../assets/plate-1.svg" alt="Placeholder: a dish of fresh produce" width="800" height="800">
+          <figcaption>Straight from the growers</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------ visit -->
+  <section class="site-section" id="visit">
+    <div class="shell-site">
+      <div class="site-head">
+        <p class="s-kicker">Visit us</p>
+        <h2 class="reveal">On the corner of Alder</h2>
+      </div>
+
+      <div class="visit-grid">
+        <div class="reveal">
+          <dl>
+            <div class="info-block">
+              <dt>Where</dt>
+              <dd>62 Alder Street, Riverside</dd>
+            </div>
+            <div class="info-block">
+              <dt>Phone</dt>
+              <dd><a href="tel:+15550182245">(555) 018-2245</a></dd>
+            </div>
+            <div class="info-block">
+              <dt>Email</dt>
+              <dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+            </div>
+          </dl>
+
+          <div class="info-block" style="border-bottom: 0">
+            <dt>Hours</dt>
+            <dd>
+              <div class="hours-list">
+                <div class="hours-row"><span>Monday — Friday</span><span>7am — 7pm</span></div>
+                <div class="hours-row"><span>Saturday</span><span>7am — 5pm</span></div>
+                <div class="hours-row"><span>Sunday</span><span>8am — 4pm</span></div>
+              </div>
+            </dd>
+          </div>
+        </div>
+
+        <form class="visit-form reveal" style="--delay:100ms">
+          <h3>Order a box</h3>
+          <p>Tell us roughly what you eat and we'll put a box aside for collection.</p>
+          <div class="field-row">
+            <label>Your name<input type="text" name="name" placeholder="Ruth Delaney" autocomplete="name"></label>
+            <label>Phone<input type="tel" name="phone" placeholder="(555) 000-0000" autocomplete="tel"></label>
+          </div>
+          <label>What you'd like<input type="text" name="order" placeholder="A veg box for two, no brassicas, collecting Friday"></label>
+          <label>Anything else<textarea name="message" placeholder="Delivering to Riverside on Thursdays, apples for the kids, an oat milk refill…"></textarea></label>
+          <button class="s-btn" type="submit">Send the order</button>
+          <p class="form-note" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="shell-site">
+    <div class="site-foot__grid">
+      <div>
+        <a class="site-brand" href="./"><span class="site-brand__mark" aria-hidden="true">A</span> Alder Street Market</a>
+        <p>A sample grocery homepage. Every name, price and photo here is placeholder content.</p>
+      </div>
+      <nav class="site-foot__links" aria-label="Footer">
+        <a href="#menu">On the shelves</a>
+        <a href="#gallery">In the aisles</a>
+        <a href="#visit">Visit us</a>
+        <a href="tel:+15550182245">Call us</a>
+      </nav>
+    </div>
+    <div class="site-foot__fine">
+      <span>62 Alder Street, Riverside</span>
+      <span>Demo layout · placeholder content</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../demo-site.js"></script>
+</body>
+</html>

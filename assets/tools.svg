@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="tbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f6f1"/>
+      <stop offset="1" stop-color="#e3ded1"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c9ced6"/>
+      <stop offset="1" stop-color="#8f97a3"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c98a50"/>
+      <stop offset="1" stop-color="#9c6329"/>
+    </linearGradient>
+    <filter id="tgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#tbg)"/>
+  <ellipse cx="400" cy="642" rx="330" ry="52" fill="#d8d2c4" opacity=".55"/>
+
+  <!-- spanner, laid diagonally -->
+  <g transform="rotate(-32 400 400)">
+    <rect x="86" y="372" width="560" height="52" rx="26" fill="url(#steel)"/>
+    <circle cx="676" cy="398" r="74" fill="url(#steel)"/>
+    <rect x="628" y="352" width="96" height="92" rx="10" fill="url(#tbg)"/>
+    <circle cx="150" cy="398" r="54" fill="url(#steel)"/>
+    <rect x="108" y="362" width="72" height="72" rx="10" fill="url(#tbg)"/>
+  </g>
+
+  <!-- pipe wrench, crossed the other way -->
+  <g transform="rotate(38 400 400)">
+    <rect x="150" y="386" width="430" height="34" rx="17" fill="url(#handle)"/>
+    <rect x="566" y="352" width="120" height="102" rx="22" fill="url(#steel)"/>
+    <rect x="566" y="404" width="132" height="24" rx="12" fill="#6f7683"/>
+  </g>
+
+  <!-- a couple of loose fittings -->
+  <ellipse cx="196" cy="596" rx="54" ry="30" fill="#b8823f"/>
+  <rect x="176" y="552" width="40" height="60" rx="14" fill="#a9762f"/>
+  <circle cx="632" cy="606" r="34" fill="none" stroke="#8f97a3" stroke-width="16"/>
+
+  <rect width="800" height="800" filter="url(#tgrain)" opacity=".06"/>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F1E3CE"/>
+      <stop offset="1" stop-color="#DCC5A4"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx=".5" cy=".3" r=".7">
+      <stop offset="0" stop-color="#FFE9BE"/>
+      <stop offset="1" stop-color="#E9C387"/>
+    </radialGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C9A87F"/>
+      <stop offset="1" stop-color="#A9885F"/>
+    </linearGradient>
+    <filter id="grain6">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg6)"/>
+
+  <path d="M120 120h260v150a130 130 0 0 1-260 0z" fill="#EFE0C7" opacity=".7"/>
+  <path d="M420 120h260v150a130 130 0 0 1-260 0z" fill="#EFE0C7" opacity=".55"/>
+  <path d="M720 120h260v150a130 130 0 0 1-260 0z" fill="#EFE0C7" opacity=".4"/>
+
+  <circle cx="250" cy="330" r="54" fill="url(#lamp)"/>
+  <circle cx="600" cy="330" r="54" fill="url(#lamp)"/>
+  <circle cx="950" cy="330" r="54" fill="url(#lamp)"/>
+  <rect x="246" y="30" width="8" height="250" fill="#C0A17A"/>
+  <rect x="596" y="30" width="8" height="250" fill="#C0A17A"/>
+  <rect x="946" y="30" width="8" height="250" fill="#C0A17A"/>
+
+  <rect y="560" width="1200" height="70" fill="url(#bar)"/>
+  <rect y="630" width="1200" height="170" fill="#C4A87F" opacity=".65"/>
+
+  <ellipse cx="330" cy="552" rx="70" ry="16" fill="#E4D2B6"/>
+  <circle cx="330" cy="522" r="30" fill="#FFFDF7"/>
+  <ellipse cx="330" cy="498" rx="18" ry="6" fill="#8FA36F"/>
+
+  <ellipse cx="700" cy="552" rx="70" ry="16" fill="#E4D2B6"/>
+  <path d="M666 552h68v-46a34 34 0 0 0-68 0z" fill="#FFFDF7" opacity=".9"/>
+
+  <ellipse cx="1000" cy="552" rx="70" ry="16" fill="#E4D2B6"/>
+  <circle cx="1000" cy="516" r="34" fill="#FFFDF7" opacity=".9"/>
+
+  <rect width="1200" height="800" filter="url(#grain6)" opacity=".07"/>
+</svg>

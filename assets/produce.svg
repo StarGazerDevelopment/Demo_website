@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="prbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf8f0"/>
+      <stop offset="1" stop-color="#e4ddc9"/>
+    </linearGradient>
+    <radialGradient id="bowl2" cx=".5" cy=".4" r=".62">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#eadfc8"/>
+    </radialGradient>
+    <filter id="prgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".88" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#prbg)"/>
+  <ellipse cx="400" cy="640" rx="290" ry="44" fill="#d6cdb6" opacity=".55"/>
+
+  <!-- bowl -->
+  <path d="M140 400h520c0 130-116 226-260 226S140 530 140 400z" fill="url(#bowl2)"/>
+  <ellipse cx="400" cy="400" rx="260" ry="52" fill="#f2e9d4"/>
+
+  <!-- produce mounded in the bowl -->
+  <circle cx="300" cy="362" r="72" fill="#c96a4a"/>
+  <circle cx="380" cy="330" r="80" fill="#d98a54"/>
+  <circle cx="470" cy="366" r="68" fill="#b8553f"/>
+  <circle cx="336" cy="292" r="56" fill="#cb7a48"/>
+  <circle cx="438" cy="286" r="52" fill="#e0a45c"/>
+  <ellipse cx="392" cy="246" rx="58" ry="22" fill="#8fae5f" transform="rotate(-16 392 246)"/>
+  <ellipse cx="258" cy="322" rx="44" ry="17" fill="#7f9a54" transform="rotate(24 258 322)"/>
+  <circle cx="540" cy="428" r="42" fill="#e6c374"/>
+  <circle cx="252" cy="440" r="38" fill="#93a86a"/>
+
+  <rect width="800" height="800" filter="url(#prgrain)" opacity=".06"/>
+</svg>

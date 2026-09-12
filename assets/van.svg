@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="vbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8f5ef"/>
+      <stop offset="1" stop-color="#e6e0d3"/>
+    </linearGradient>
+    <linearGradient id="vbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8e3d8"/>
+    </linearGradient>
+    <filter id="vgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#vbg)"/>
+
+  <!-- road -->
+  <ellipse cx="600" cy="652" rx="470" ry="46" fill="#cfc6b3" opacity=".5"/>
+  <rect y="640" width="1200" height="4" fill="#cfc6b3" opacity=".55"/>
+
+  <!-- roof rack with a length of pipe -->
+  <rect x="520" y="252" width="452" height="14" rx="7" fill="#b9b1a0"/>
+  <rect x="536" y="222" width="420" height="26" rx="13" fill="#c9a17a"/>
+  <rect x="700" y="222" width="52" height="26" rx="6" fill="#a9793f"/>
+
+  <!-- van body -->
+  <path d="M188 560V378c0-16 12-28 28-28h84l56-66c9-11 22-17 36-17h430c16 0 28 12 28 28v265z" fill="url(#vbody)"/>
+  <path d="M300 350l56-66c9-11 22-17 36-17h58v83z" fill="#dfe6ea"/>
+  <rect x="470" y="267" width="150" height="83" rx="6" fill="#dfe6ea"/>
+  <rect x="640" y="267" width="150" height="83" rx="6" fill="#dfe6ea"/>
+
+  <!-- livery stripe -->
+  <rect x="188" y="452" width="812" height="34" fill="#2f5d80" opacity=".92"/>
+  <rect x="188" y="486" width="812" height="8" fill="#c98a50"/>
+
+  <!-- door seams -->
+  <path d="M470 350v210M640 350v210" stroke="#e2ddd2" stroke-width="3"/>
+
+  <!-- wheels -->
+  <circle cx="360" cy="572" r="62" fill="#3c4250"/>
+  <circle cx="360" cy="572" r="26" fill="#cfc6b3"/>
+  <circle cx="880" cy="572" r="62" fill="#3c4250"/>
+  <circle cx="880" cy="572" r="26" fill="#cfc6b3"/>
+
+  <rect width="1200" height="800" filter="url(#vgrain)" opacity=".06"/>
+</svg>

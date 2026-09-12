@@ -1,0 +1,7 @@
+# Local scratch — browser profiles and verification scripts live here
+.cache/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini

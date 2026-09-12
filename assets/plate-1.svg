@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7EDDD"/>
+      <stop offset="1" stop-color="#E8D6BC"/>
+    </linearGradient>
+    <radialGradient id="plate" cx=".5" cy=".42" r=".62">
+      <stop offset="0" stop-color="#FFFDF7"/>
+      <stop offset="1" stop-color="#EDE0CB"/>
+    </radialGradient>
+    <linearGradient id="food" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D98A54"/>
+      <stop offset="1" stop-color="#B85F32"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#93A67C"/>
+      <stop offset="1" stop-color="#6C8055"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <circle cx="400" cy="380" r="290" fill="url(#plate)"/>
+  <circle cx="400" cy="380" r="240" fill="none" stroke="#DCC9AB" stroke-width="2"/>
+
+  <ellipse cx="400" cy="395" rx="132" ry="112" fill="url(#food)"/>
+  <path d="M300 350c40-46 160-46 196 6-30 66-166 74-196-6z" fill="#E9A870" opacity=".55"/>
+  <ellipse cx="372" cy="352" rx="42" ry="30" fill="#F2C48F" opacity=".5"/>
+  <path d="M404 300c46 10 74 46 78 92-44 12-92-24-98-72z" fill="url(#leaf)"/>
+  <path d="M336 452c38-16 84-8 108 22-34 26-84 20-108-22z" fill="url(#leaf)" opacity=".85"/>
+  <circle cx="470" cy="430" r="13" fill="#8E4A26" opacity=".8"/>
+  <circle cx="330" cy="392" r="9" fill="#8E4A26" opacity=".7"/>
+  <circle cx="440" cy="340" r="7" fill="#8E4A26" opacity=".6"/>
+
+  <rect width="800" height="800" filter="url(#grain)" opacity=".07"/>
+</svg>
