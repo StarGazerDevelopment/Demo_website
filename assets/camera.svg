@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="kbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8f7f2"/>
+      <stop offset="1" stop-color="#e3e0d6"/>
+    </linearGradient>
+    <linearGradient id="kcase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dedbd1"/>
+    </linearGradient>
+    <radialGradient id="lens" cx=".38" cy=".34" r=".72">
+      <stop offset="0" stop-color="#6d7a8c"/>
+      <stop offset="1" stop-color="#22272f"/>
+    </radialGradient>
+    <filter id="kgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#kbg)"/>
+
+  <!-- brick wall to mount on -->
+  <g fill="#e6e1d5">
+    <rect x="0" y="120" width="800" height="560"/>
+  </g>
+  <g stroke="#d6d0c1" stroke-width="4" opacity=".9">
+    <path d="M0 200h800M0 280h800M0 360h800M0 440h800M0 520h800M0 600h800"/>
+    <path d="M120 120v80M320 120v80M520 120v80M720 120v80M40 200v80M240 200v80M440 200v80M640 200v80
+             M120 280v80M320 280v80M520 280v80M720 280v80M40 360v80M240 360v80M440 360v80M640 360v80
+             M120 440v80M320 440v80M520 440v80M720 440v80M40 520v80M240 520v80M440 520v80M640 520v80"/>
+  </g>
+
+  <!-- bracket -->
+  <rect x="150" y="292" width="90" height="30" rx="14" fill="#b9b1a0"/>
+  <rect x="236" y="272" width="120" height="70" rx="18" fill="#cfc8b8"/>
+
+  <!-- camera body -->
+  <rect x="336" y="222" width="330" height="170" rx="60" fill="url(#kcase)" stroke="#cfc8b8" stroke-width="3"/>
+  <rect x="336" y="222" width="330" height="52" rx="26" fill="#f6f3ea"/>
+
+  <!-- lens -->
+  <circle cx="646" cy="308" r="86" fill="#3c4250"/>
+  <circle cx="646" cy="308" r="62" fill="url(#lens)"/>
+  <circle cx="622" cy="286" r="18" fill="#cfe0ea" opacity=".55"/>
+
+  <!-- IR ring -->
+  <circle cx="646" cy="308" r="74" fill="none" stroke="#8d97a5" stroke-width="6" opacity=".7"/>
+
+  <!-- status light -->
+  <circle cx="382" cy="200" r="11" fill="#c05a3a"/>
+  <rect x="404" y="192" width="70" height="16" rx="8" fill="#dedbd1"/>
+
+  <!-- cable drop -->
+  <path d="M420 392v70c0 40-26 60-70 60H240" fill="none" stroke="#cfc8b8" stroke-width="16" stroke-linecap="round"/>
+
+  <rect width="800" height="800" filter="url(#kgrain)" opacity=".06"/>
+</svg>

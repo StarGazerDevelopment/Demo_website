@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="bbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8f6f0"/>
+      <stop offset="1" stop-color="#e5e0d3"/>
+    </linearGradient>
+    <linearGradient id="bcase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e7e2d7"/>
+    </linearGradient>
+    <linearGradient id="bbreaker" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f1ec"/>
+      <stop offset="1" stop-color="#d6d3c9"/>
+    </linearGradient>
+    <filter id="bgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bbg)"/>
+  <rect x="0" y="660" width="1200" height="140" fill="#d9d3c5" opacity=".45"/>
+
+  <!-- wall enclosure -->
+  <rect x="212" y="128" width="776" height="516" rx="26" fill="url(#bcase)" stroke="#cfc8b8" stroke-width="3"/>
+  <rect x="246" y="162" width="708" height="392" rx="14" fill="#f4f2ea" stroke="#ded8c9" stroke-width="2"/>
+
+  <!-- top rail of breakers -->
+  <g>
+    <rect x="278" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="278" y="196" width="60" height="30" rx="8" fill="#3c4250" opacity=".85"/>
+    <rect x="352" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="352" y="196" width="60" height="30" rx="8" fill="#3c4250" opacity=".85"/>
+    <rect x="426" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="426" y="196" width="60" height="30" rx="8" fill="#3c4250" opacity=".85"/>
+    <rect x="500" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="500" y="196" width="60" height="30" rx="8" fill="#3c4250" opacity=".85"/>
+    <rect x="574" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="574" y="196" width="60" height="30" rx="8" fill="#c08a1e"/>
+    <rect x="648" y="196" width="60" height="96" rx="8" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+    <rect x="648" y="196" width="60" height="30" rx="8" fill="#c08a1e"/>
+  </g>
+
+  <!-- safety switch pair -->
+  <g>
+    <rect x="748" y="180" width="180" height="128" rx="14" fill="#f7f4ea" stroke="#cfc8b8" stroke-width="2"/>
+    <circle cx="838" cy="232" r="26" fill="#fdfcf7" stroke="#c9c4b6" stroke-width="3"/>
+    <rect x="826" y="222" width="24" height="20" rx="5" fill="#3c4250"/>
+    <rect x="782" y="276" width="112" height="12" rx="6" fill="#c08a1e" opacity=".55"/>
+  </g>
+
+  <!-- lower row: main switch -->
+  <rect x="278" y="330" width="150" height="196" rx="12" fill="url(#bbreaker)" stroke="#c9c4b6" stroke-width="2"/>
+  <rect x="308" y="360" width="90" height="120" rx="10" fill="#3c4250"/>
+  <rect x="340" y="386" width="26" height="70" rx="8" fill="#f2f1ec"/>
+  <rect x="296" y="492" width="114" height="12" rx="6" fill="#c08a1e" opacity=".6"/>
+
+  <!-- label strip -->
+  <rect x="456" y="330" width="498" height="196" rx="12" fill="#fbf9f2" stroke="#ded8c9" stroke-width="2"/>
+  <g stroke="#c6bfae" stroke-width="3" stroke-linecap="round">
+    <path d="M486 372h180M486 402h120M486 432h210M486 462h150M486 492h96"/>
+  </g>
+
+  <!-- conduit leaving the base -->
+  <path d="M600 644v58" stroke="#c9c4b6" stroke-width="18" stroke-linecap="round"/>
+
+  <rect width="1200" height="800" filter="url(#bgrain)" opacity=".06"/>
+</svg>

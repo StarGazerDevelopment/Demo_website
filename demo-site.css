@@ -32,6 +32,19 @@ body[data-theme="cafe"]    { --s-accent: #6c8451; --s-accent-soft: rgba(108, 132
 body[data-theme="trade"]   { --s-accent: #2f5d80; --s-accent-soft: rgba(47, 93, 128, 0.12);  --s-bg: #f7f5f0; }
 body[data-theme="grocery"] { --s-accent: #5b7f3f; --s-accent-soft: rgba(91, 127, 63, 0.13);  --s-bg: #faf8ee; }
 
+body[data-theme="wok"]      { --s-accent: #b0432b; --s-accent-soft: rgba(176, 67, 43, 0.12);  --s-bg: #fdf6ef; }
+body[data-theme="pizza"]    { --s-accent: #c1653a; --s-accent-soft: rgba(193, 101, 58, 0.12); --s-bg: #fdf5ee; }
+body[data-theme="sushi"]    { --s-accent: #2f6b63; --s-accent-soft: rgba(47, 107, 99, 0.12);  --s-bg: #f6f7f2; }
+body[data-theme="yuzu"]     { --s-accent: #7d8b2f; --s-accent-soft: rgba(125, 139, 47, 0.13); --s-bg: #faf9ec; }
+body[data-theme="spice"]    { --s-accent: #a8672a; --s-accent-soft: rgba(168, 103, 42, 0.12); --s-bg: #fdf7ee; }
+body[data-theme="pub"]      { --s-accent: #7a4a2e; --s-accent-soft: rgba(122, 74, 46, 0.12);  --s-bg: #faf5ee; }
+body[data-theme="plumb"]    { --s-accent: #356b74; --s-accent-soft: rgba(53, 107, 116, 0.12); --s-bg: #f5f7f6; }
+body[data-theme="copper"]   { --s-accent: #9a6033; --s-accent-soft: rgba(154, 96, 51, 0.12);  --s-bg: #fbf6f0; }
+body[data-theme="steel"]    { --s-accent: #55636e; --s-accent-soft: rgba(85, 99, 110, 0.12);  --s-bg: #f6f6f3; }
+body[data-theme="electric"] { --s-accent: #b8871c; --s-accent-soft: rgba(184, 135, 28, 0.13); --s-bg: #fdf9ed; }
+body[data-theme="bolt"]     { --s-accent: #3b4f8a; --s-accent-soft: rgba(59, 79, 138, 0.12);  --s-bg: #f6f6f9; }
+body[data-theme="signal"]   { --s-accent: #6d5b8f; --s-accent-soft: rgba(109, 91, 143, 0.12); --s-bg: #f8f6fb; }
+
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -411,4 +424,147 @@ h1, h2, h3, .s-display {
   .gallery-wall .wide { grid-column: span 2; }
   .field-row { grid-template-columns: 1fr; }
   .visit-form { padding: 26px 22px; }
+}
+
+/* ==========================================================================
+   Layout variants.
+
+   Every generated business demo gets its own combination of a hero, a list
+   layout and a gallery layout, so no two pages are the same arrangement. The
+   four hand-written style demos use the plain defaults and none of these
+   classes, which is why nothing here changes them.
+   ========================================================================== */
+
+/* ------------------------------------------------------------ hero variants */
+
+/* Media on the left instead of the right. */
+.hero-site--splitLeft .hero-site__grid { grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr); }
+.hero-site--splitLeft .hero-site__media { order: -1; }
+
+/* Centred, with a wide image underneath. */
+.hero-site--center { text-align: center; }
+.hero-site--center .hero-site__grid { grid-template-columns: minmax(0, 1fr); gap: 54px; justify-items: center; }
+.hero-site--center .hero-site__lede { margin-inline: auto; }
+.hero-site--center .hero-site__actions,
+.hero-site--center .hero-site__facts { justify-content: center; }
+.hero-site--center .s-kicker::before { display: none; }
+.hero-site--center .hero-site__media { width: 100%; }
+.hero-site--center .hero-site__media img { aspect-ratio: 16 / 7; }
+.hero-site--center .hero-site__badge { right: auto; left: 50%; bottom: -22px; transform: translateX(-50%); }
+
+/* Full-bleed image behind a floating panel of text. */
+.hero-site--full { min-height: 92vh; }
+.hero-site--full .hero-site__grid { position: static; grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr); }
+.hero-site--full .hero-site__media { position: absolute; inset: 0; z-index: 0; }
+.hero-site--full .hero-site__media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0.34;
+  animation: none;
+}
+.hero-site--full .hero-site__grid > div:first-child {
+  position: relative;
+  z-index: 1;
+  padding: 46px 44px;
+  border-radius: var(--s-radius-lg);
+  background: color-mix(in srgb, var(--s-paper) 86%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid var(--s-line);
+  box-shadow: 0 60px 110px -70px rgba(58, 46, 32, 0.9);
+}
+.hero-site--full .hero-site__badge { right: 34px; bottom: 38px; }
+
+/* Staggered: the taller image sits low, the panel floats over its edge. */
+.hero-site--offset { padding: 92px 0 128px; }
+.hero-site--offset .hero-site__grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: end; }
+.hero-site--offset .hero-site__media { transform: translateY(40px); }
+.hero-site--offset .hero-site__media img { aspect-ratio: 4 / 4.5; }
+.hero-site--offset .hero-site__badge { right: auto; left: -26px; bottom: 54px; }
+
+/* ------------------------------------------------------------ list variants */
+
+/* Numbered single column. */
+.list--rows .menu-grid { grid-template-columns: minmax(0, 1fr); gap: 0; counter-reset: row; }
+.list--rows .menu-item { grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: 6px 20px; }
+.list--rows .menu-item::before {
+  counter-increment: row;
+  content: counter(row, decimal-leading-zero);
+  font-family: var(--s-display);
+  font-size: 15px;
+  color: var(--s-accent);
+  opacity: 0.6;
+}
+.list--rows .menu-item h3 { grid-column: 2; }
+.list--rows .menu-item .price { grid-column: 3; }
+.list--rows .menu-item p { grid-column: 2 / -1; }
+
+/* Cards on paper, with a hover lift. */
+.list--cards .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.list--cards .menu-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 28px 26px;
+  border: 1px solid var(--s-line);
+  border-radius: var(--s-radius);
+  background: var(--s-paper);
+  transition: transform 0.5s var(--s-ease), box-shadow 0.5s var(--s-ease), border-color 0.3s ease;
+}
+.list--cards .menu-item:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--s-accent) 45%, transparent);
+  box-shadow: 0 34px 60px -44px rgba(58, 46, 32, 0.9);
+}
+
+/* --------------------------------------------------------- gallery variants */
+
+/* Two big frames. */
+.gal--duo .gallery-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 310px; }
+.gal--duo .gallery-wall .big,
+.gal--duo .gallery-wall .wide { grid-column: span 2; grid-row: span 1; }
+.gal--duo .gallery-wall .tall { grid-row: span 1; }
+
+/* One large frame, two small, one wide underneath. */
+.gal--mosaic .gallery-wall .big,
+.gal--mosaic .gallery-wall .tall,
+.gal--mosaic .gallery-wall .wide { grid-column: auto; grid-row: auto; }
+.gal--mosaic .gallery-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 192px; }
+.gal--mosaic .gallery-wall figure:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+.gal--mosaic .gallery-wall figure:nth-child(4) { grid-column: 3 / 5; }
+
+/* A level row of four. */
+.gal--strip .gallery-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 306px; }
+.gal--strip .gallery-wall .big,
+.gal--strip .gallery-wall .tall,
+.gal--strip .gallery-wall .wide { grid-column: span 1; grid-row: span 1; }
+
+/* --------------------------------------------------- variant responsiveness */
+
+@media (max-width: 1000px) {
+  .hero-site--full { min-height: auto; }
+  .hero-site--offset .hero-site__media { transform: none; }
+  .hero-site--offset .hero-site__badge { left: 18px; bottom: 26px; }
+  .list--cards .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gal--duo .gallery-wall { grid-auto-rows: 230px; }
+  .gal--strip .gallery-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 240px; }
+}
+
+@media (max-width: 760px) {
+  .hero-site--center .hero-site__badge { bottom: -18px; }
+  .hero-site--center .hero-site__media img { aspect-ratio: 4 / 3; }
+  .hero-site--full .hero-site__grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-site--full .hero-site__grid > div:first-child { padding: 30px 24px; }
+  .hero-site--full .hero-site__badge { right: 18px; bottom: 18px; }
+  .list--cards .menu-grid,
+  .gal--duo .gallery-wall,
+  .gal--mosaic .gallery-wall,
+  .gal--strip .gallery-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 152px; }
+  .gal--mosaic .gallery-wall figure:nth-child(1),
+  .gal--mosaic .gallery-wall figure:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+}
+
+@media (max-width: 480px) {
+  .list--cards .menu-grid { grid-template-columns: minmax(0, 1fr); }
 }

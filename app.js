@@ -3,6 +3,7 @@
    Vanilla ESM, no dependencies. */
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hoverFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 /* ------------------------------------------------------------- sticky header */
 
@@ -91,28 +92,28 @@ function initStaggerGroups() {
 
 /* -------------------------------------------------- miniature preview scaling */
 
+const PREVIEW_BASE_WIDTH = 1440;
+
+function fitPreview(view) {
+  const frame = view.querySelector('iframe');
+  if (!frame) return;
+  const scale = view.clientWidth / PREVIEW_BASE_WIDTH;
+  if (!scale) return;
+  frame.style.transform = `scale(${scale})`;
+  // Grow the frame's layout box to cover the scaled area, so the preview
+  // is never letterboxed on the right or bottom edge.
+  frame.style.height = `${Math.round(view.clientHeight / scale)}px`;
+}
+
 function initPreviews() {
-  const views = document.querySelectorAll('.chrome__view');
+  const views = [...document.querySelectorAll('.chrome__view')];
   if (!views.length) return;
 
-  const BASE_WIDTH = 1440;
-
-  const fit = (view) => {
-    const frame = view.querySelector('iframe');
-    if (!frame) return;
-    const scale = view.clientWidth / BASE_WIDTH;
-    if (!scale) return;
-    frame.style.transform = `scale(${scale})`;
-    // Grow the frame's layout box to cover the scaled area, so the preview
-    // is never letterboxed on the right or bottom edge.
-    frame.style.height = `${Math.round(view.clientHeight / scale)}px`;
-  };
-
-  const fitAll = () => views.forEach(fit);
+  const fitAll = () => views.forEach(fitPreview);
   fitAll();
 
   if ('ResizeObserver' in window) {
-    const ro = new ResizeObserver((entries) => entries.forEach((e) => fit(e.target)));
+    const ro = new ResizeObserver((entries) => entries.forEach((e) => fitPreview(e.target)));
     views.forEach((v) => ro.observe(v));
   } else {
     window.addEventListener('resize', fitAll, { passive: true });
@@ -122,6 +123,121 @@ function initPreviews() {
   document.querySelectorAll('.chrome__view iframe').forEach((frame) => frame.setAttribute('tabindex', '-1'));
 
   window.addEventListener('load', fitAll);
+}
+
+/* The business grid holds 25 more previews, each a whole page. Build the
+   iframe only once its card is nearly on screen — a placeholder frame stands
+   in until then — so the page never fires 25 loads at once. */
+function initDeferredPreviews() {
+  const slots = [...document.querySelectorAll('.chrome__view[data-preview-src]')];
+  if (!slots.length) return;
+
+  const hydrate = (slot) => {
+    if (slot.dataset.hydrated) return;
+    slot.dataset.hydrated = '1';
+
+    const frame = document.createElement('iframe');
+    frame.src = slot.dataset.previewSrc;
+    frame.title = `${slot.closest('.demo-card')?.querySelector('h3')?.textContent.trim() ?? 'Demo'} preview`;
+    frame.loading = 'lazy';
+    frame.scrolling = 'no';
+    frame.setAttribute('tabindex', '-1');
+
+    slot.querySelector('.chrome__placeholder')?.remove();
+    slot.append(frame);
+    fitPreview(slot);
+    window.addEventListener('load', () => fitPreview(slot), { once: true });
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    slots.forEach(hydrate);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        hydrate(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '600px 0px' },
+  );
+  slots.forEach((slot) => observer.observe(slot));
+}
+
+/* ------------------------------------------------------ businesses menu */
+
+function initNavDrop() {
+  document.querySelectorAll('[data-nav-drop]').forEach((drop) => {
+    const trigger = drop.querySelector('.nav-drop__trigger');
+    const panel = drop.querySelector('.nav-drop__panel');
+    if (!trigger || !panel) return;
+
+    const isOpen = () => drop.classList.contains('is-open');
+    const setOpen = (open) => {
+      drop.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    };
+    setOpen(false);
+
+    // Click works everywhere: touch, keyboard, and anyone who prefers it.
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      setOpen(!isOpen());
+    });
+
+    // Pointer users also get hover, which is the expected feel for a menu.
+    if (hoverFine) {
+      drop.addEventListener('mouseenter', () => setOpen(true));
+      drop.addEventListener('mouseleave', () => {
+        if (!drop.contains(document.activeElement)) setOpen(false);
+      });
+      drop.addEventListener('focusout', () => {
+        requestAnimationFrame(() => {
+          if (!drop.contains(document.activeElement)) setOpen(false);
+        });
+      });
+    }
+
+    drop.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !isOpen()) return;
+      setOpen(false);
+      trigger.focus();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (isOpen() && !drop.contains(event.target)) setOpen(false);
+    });
+
+    panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  });
+}
+
+/* ---------------------------------------------------- business card filters */
+
+function initBizFilters() {
+  const bar = document.querySelector('[data-biz-filters]');
+  if (!bar) return;
+
+  const cards = [...document.querySelectorAll('[data-biz-card]')];
+
+  bar.addEventListener('click', (event) => {
+    const chip = event.target.closest('[data-filter]');
+    if (!chip) return;
+    const filter = chip.dataset.filter;
+
+    bar.querySelectorAll('[data-filter]').forEach((other) => {
+      const active = other === chip;
+      other.classList.toggle('is-active', active);
+      other.setAttribute('aria-pressed', String(active));
+    });
+
+    cards.forEach((card) => {
+      card.hidden = filter !== 'all' && card.dataset.category !== filter;
+    });
+  });
 }
 
 /* -------------------------------------------------- gentle hero card parallax */
@@ -178,6 +294,9 @@ function init() {
   initMarquee();
   initReveals();
   initPreviews();
+  initDeferredPreviews();
+  initNavDrop();
+  initBizFilters();
   initParallax();
 }
 

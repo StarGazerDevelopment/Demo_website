@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder image">
+  <defs>
+    <linearGradient id="lbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf7f0"/>
+      <stop offset="1" stop-color="#e4ddcd"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#f6dfa8" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#f6dfa8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfaf2"/>
+      <stop offset="1" stop-color="#d8cdb5"/>
+    </linearGradient>
+    <filter id="lgrain">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#lbg)"/>
+
+  <!-- ceiling -->
+  <rect x="0" y="0" width="800" height="72" fill="#e9e3d5"/>
+  <rect x="0" y="66" width="800" height="8" fill="#cfc6b3" opacity=".7"/>
+
+  <!-- cord and shade -->
+  <rect x="394" y="72" width="12" height="196" fill="#b9b1a0"/>
+  <path d="M332 306c0-28 30-44 68-44s68 16 68 44c0 10-8 16-20 16H352c-12 0-20-6-20-16z" fill="#3c4250"/>
+  <path d="M336 316h128l-30 128c-4 18-16 26-34 26s-30-8-34-26z" fill="url(#shade)"/>
+
+  <!-- warm pool of light -->
+  <ellipse cx="400" cy="560" rx="300" ry="180" fill="url(#glow)"/>
+  <circle cx="400" cy="470" r="26" fill="#fdf3d4"/>
+
+  <!-- table under it -->
+  <rect x="212" y="612" width="376" height="22" rx="11" fill="#d8c7a8"/>
+  <rect x="236" y="634" width="16" height="106" rx="8" fill="#c9b48f"/>
+  <rect x="548" y="634" width="16" height="106" rx="8" fill="#c9b48f"/>
+
+  <rect width="800" height="800" filter="url(#lgrain)" opacity=".06"/>
+</svg>
