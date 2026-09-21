@@ -274,7 +274,7 @@ function footer(biz) {
       <nav class="site-foot__links" aria-label="Footer">
 ${c.nav.map((n) => `        <a href="${attr(n.href)}">${esc(n.label)}</a>`).join('\n')}
         <a href="${attr(cta.href)}">${biz.category === 'food' ? 'Reserve' : 'Call us'}</a>
-        <a href="../../#businesses">All the demos</a>
+        <a href="../../businesses/">All the businesses</a>
       </nav>
     </div>
     <div class="site-foot__fine">
@@ -348,36 +348,138 @@ ${footer(biz)}
 
 const CATEGORY_ORDER = ['food', 'plumbing', 'electrical'];
 
-function menuBlock() {
+/* --------------------------------------------------------- the picker page */
+
+const PICKER = join(HERE, 'businesses', 'index.html');
+
+const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+const ICON_GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+
+/*
+ * The Businesses button in the top bar points here rather than opening a menu:
+ * twenty-five names in a dropdown is a wall of text in a fixed header, and it
+ * pushes the page around on narrow screens. A page gives the list room, gives
+ * every name a line to itself, and makes the whole thing searchable and
+ * shareable by URL.
+ */
+function pickerPage() {
+  const total = BUSINESSES.length;
+
   const groups = CATEGORY_ORDER.map((key) => {
     const list = BUSINESSES.filter((b) => b.category === key);
-    return `          <div class="nav-drop__group">
-            <p class="nav-drop__title">${esc(CATEGORIES[key].label)} <span>${list.length}</span></p>
-            <ul class="nav-drop__list">
-${list.map((b) => `              <li><a href="sites/${b.slug}/"><i class="nav-drop__swatch" style="--sw:${tint(b)}" aria-hidden="true"></i>${esc(b.name)}</a></li>`).join('\n')}
-            </ul>
-          </div>`;
+    const rows = list.map((b) => `          <li class="picker__row" data-name="${attr(`${b.name} ${b.short} ${b.kicker}`.toLowerCase())}">
+            <a href="../sites/${b.slug}/">
+              <span class="picker__swatch" style="--sw:${tint(b)}" aria-hidden="true"></span>
+              <span class="picker__body">
+                <span class="picker__name">${esc(b.name)}</span>
+                <span class="picker__blurb">${esc(b.blurb)}</span>
+              </span>
+              <span class="picker__go">${ICON_GO}</span>
+            </a>
+          </li>`).join('\n');
+
+    return `        <section class="picker__group" data-picker-group>
+          <div class="picker__group-head">
+            <h2>${esc(CATEGORIES[key].label)}</h2>
+            <span class="picker__count">${list.length}</span>
+          </div>
+          <ul class="picker__list">
+${rows}
+          </ul>
+        </section>`;
   }).join('\n');
 
-  return `      <div class="nav-drop" data-nav-drop>
-        <button class="nav-drop__trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="business-menu">
-          Businesses
-          <span class="nav-drop__count" aria-hidden="true">${BUSINESSES.length}</span>
-          <svg class="nav-drop__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <div class="nav-drop__panel" id="business-menu">
-          <div class="nav-drop__inner">
-            <div class="nav-drop__intro">
-              <p class="nav-drop__eyebrow">Sample homepages, written for</p>
-              <p class="nav-drop__lead">${BUSINESSES.length} local businesses across three trades. Each one has its own page — pick a name to open it.</p>
-              <a class="nav-drop__all" href="#businesses">See all ${BUSINESSES.length} below ↓</a>
-            </div>
-            <div class="nav-drop__groups">
-${groups}
-            </div>
-          </div>
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All ${total} businesses — Your Future Website</title>
+<meta name="description" content="Every sample homepage in one place: ${total} local businesses across restaurants, cafés, plumbing and electrical work. Open any of them.">
+<meta name="theme-color" content="#f9f4ea">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23b87b45'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23fffaf2' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip-link" href="#list">Skip to the list</a>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a class="wordmark" href="../">
+      <span class="wordmark__mark" aria-hidden="true">Y</span>
+      Your Future Website
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a class="site-nav__link" href="../#demos">Demos</a>
+      <a class="site-nav__link" href="./" aria-current="page">Businesses</a>
+      <a class="site-nav__link site-nav__link--minor" href="../#details">Details</a>
+      <a class="btn" href="../#businesses">Back to the showcase ${ICON_ARROW}</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="picker-hero">
+    <div class="shell">
+      <p class="eyebrow reveal">The businesses</p>
+      <h1 class="display reveal" style="--delay:80ms">Every business,<br>one page each.</h1>
+      <p class="lede reveal" style="--delay:140ms">
+        ${total} local businesses across three trades, each with its own homepage —
+        its own palette, its own arrangement, its own address. Start typing to
+        narrow the list, or just pick a name.
+      </p>
+
+      <div class="picker-search reveal" style="--delay:200ms">
+        <div class="picker-search__field">
+          <svg class="picker-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+          <label class="picker-search__label" for="picker-search">Search the businesses</label>
+          <input id="picker-search" type="search" data-picker-search placeholder="Type a name — wok, plumbing, sushi…" autocomplete="off" spellcheck="false">
         </div>
-      </div>`;
+        <p class="picker-search__count" data-picker-count role="status">${total} businesses</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="picker" id="list">
+    <div class="shell">
+      <div class="picker__groups" data-picker>
+${groups}
+      </div>
+      <p class="picker__empty" data-picker-empty hidden>No business matches that name. Try fewer letters.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div>
+        <a class="wordmark" href="../">
+          <span class="wordmark__mark" aria-hidden="true">Y</span>
+          Your Future Website
+        </a>
+        <p>Business names come from the prospect list; every price, phone number and photo is placeholder content.</p>
+      </div>
+      <nav class="footer-links" aria-label="Elsewhere">
+        <a href="../#demos">The four style directions</a>
+        <a href="../#details">What's included</a>
+        <a href="../">Back to the top</a>
+      </nav>
+    </div>
+    <div class="site-footer__fine">
+      <span>Placeholder images and text throughout.</span>
+      <span>Static site — no tracking, no cookies.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="../app.js"></script>
+</body>
+</html>
+`;
 }
 
 function gridBlock() {
@@ -481,7 +583,8 @@ async function main() {
   const { looks } = validate();
 
   const indexHtml = await readFile(INDEX, 'utf8');
-  const nextIndex = inject(inject(indexHtml, 'businesses:menu', menuBlock()), 'businesses:grid', gridBlock());
+  const nextIndex = inject(indexHtml, 'businesses:grid', gridBlock());
+  const nextPicker = pickerPage();
 
   const stale = [];
   let written = 0;
@@ -506,6 +609,16 @@ async function main() {
     else await writeFile(INDEX, nextIndex, 'utf8');
   }
 
+  let currentPicker = null;
+  try { currentPicker = await readFile(PICKER, 'utf8'); } catch { /* not written yet */ }
+  if (currentPicker !== nextPicker) {
+    if (check) stale.push('businesses/index.html');
+    else {
+      await mkdir(dirname(PICKER), { recursive: true });
+      await writeFile(PICKER, nextPicker, 'utf8');
+    }
+  }
+
   if (check) {
     if (stale.length) {
       console.error('Out of date — re-run `node build-sites.mjs`:\n' + stale.map((s) => `  - ${s}`).join('\n'));
@@ -528,7 +641,7 @@ async function main() {
   const byCat = CATEGORY_ORDER.map((k) => `${CATEGORIES[k].label}: ${BUSINESSES.filter((b) => b.category === k).length}`).join(', ');
   console.log(`Wrote ${BUSINESSES.length} business pages (${written} changed)${removed ? `, removed ${removed} stale folder(s)` : ''}.`);
   console.log(`${byCat}. ${looks} distinct theme + layout combinations.`);
-  console.log(`index.html: nav menu + ${BUSINESSES.length} cards injected.`);
+  console.log(`index.html: ${BUSINESSES.length} cards injected. businesses/index.html: picker written.`);
 }
 
 main().catch((err) => {

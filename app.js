@@ -3,7 +3,6 @@
    Vanilla ESM, no dependencies. */
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const hoverFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 /* ------------------------------------------------------------- sticky header */
 
@@ -167,52 +166,46 @@ function initDeferredPreviews() {
   slots.forEach((slot) => observer.observe(slot));
 }
 
-/* ------------------------------------------------------ businesses menu */
+/* --------------------------------------------------------- business picker */
 
-function initNavDrop() {
-  document.querySelectorAll('[data-nav-drop]').forEach((drop) => {
-    const trigger = drop.querySelector('.nav-drop__trigger');
-    const panel = drop.querySelector('.nav-drop__panel');
-    if (!trigger || !panel) return;
+/* The Businesses page lists all 25 by trade. Typing narrows the list, and a
+   group hides itself once none of its businesses match. */
+function initPickerSearch() {
+  const input = document.querySelector('[data-picker-search]');
+  if (!input) return;
 
-    const isOpen = () => drop.classList.contains('is-open');
-    const setOpen = (open) => {
-      drop.classList.toggle('is-open', open);
-      trigger.setAttribute('aria-expanded', String(open));
-    };
-    setOpen(false);
+  const rows = [...document.querySelectorAll('.picker__row')];
+  const groups = [...document.querySelectorAll('[data-picker-group]')];
+  const count = document.querySelector('[data-picker-count]');
+  const empty = document.querySelector('[data-picker-empty]');
+  const total = rows.length;
 
-    // Click works everywhere: touch, keyboard, and anyone who prefers it.
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault();
-      setOpen(!isOpen());
+  const apply = () => {
+    const query = input.value.trim().toLowerCase();
+    let shown = 0;
+
+    rows.forEach((row) => {
+      const match = !query || row.dataset.name.includes(query);
+      row.hidden = !match;
+      if (match) shown += 1;
     });
 
-    // Pointer users also get hover, which is the expected feel for a menu.
-    if (hoverFine) {
-      drop.addEventListener('mouseenter', () => setOpen(true));
-      drop.addEventListener('mouseleave', () => {
-        if (!drop.contains(document.activeElement)) setOpen(false);
-      });
-      drop.addEventListener('focusout', () => {
-        requestAnimationFrame(() => {
-          if (!drop.contains(document.activeElement)) setOpen(false);
-        });
-      });
-    }
-
-    drop.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape' || !isOpen()) return;
-      setOpen(false);
-      trigger.focus();
+    groups.forEach((group) => {
+      group.hidden = !group.querySelector('.picker__row:not([hidden])');
     });
 
-    document.addEventListener('click', (event) => {
-      if (isOpen() && !drop.contains(event.target)) setOpen(false);
-    });
+    if (count) count.textContent = shown === total ? `${total} businesses` : `${shown} of ${total} businesses`;
+    if (empty) empty.hidden = shown !== 0;
+  };
 
-    panel.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  input.addEventListener('input', apply);
+  input.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !input.value) return;
+    input.value = '';
+    apply();
   });
+
+  apply();
 }
 
 /* ---------------------------------------------------- business card filters */
@@ -295,7 +288,7 @@ function init() {
   initReveals();
   initPreviews();
   initDeferredPreviews();
-  initNavDrop();
+  initPickerSearch();
   initBizFilters();
   initParallax();
 }

@@ -8,8 +8,8 @@ tracking. Two things live side by side:
 1. **Four style directions** — hand-written sample homepages showing the range of
    the layout system.
 2. **One page per business** — a full homepage for each of the 25 businesses on
-   the prospect list, each at its own address, grouped under a **Businesses**
-   menu in the top bar.
+   the prospect list, each at its own address, reachable from a **Businesses**
+   button in the top bar.
 
 > Business names come from `Website.xlsx` (the prospect list). Everything else —
 > prices, hours, reviews, phone numbers, photos — is invented placeholder
@@ -20,6 +20,7 @@ tracking. Two things live side by side:
 | Page | Business | Theme |
 | --- | --- | --- |
 | `index.html` | The showcase: hero, marquee, four style demos, **all 25 businesses**, what's included, closing band | — |
+| `businesses/index.html` | The picker: every business by trade, with a search box. This is what the **Businesses** button opens | — |
 | `sites/maison/` | Maison Crème — French bistro | `bistro` (brick) |
 | `sites/daily-grind/` | The Daily Grind — café & bakery | `cafe` (sage) |
 | `sites/ridgeline/` | Ridgeline Plumbing — plumbers & gas fitters | `trade` (slate blue) |
@@ -64,11 +65,11 @@ Everything is generated from one table, so edit `businesses.mjs` and re-run:
 node build-sites.mjs
 ```
 
-That rewrites all 25 pages **and** injects the nav "Businesses" menu and the card
-grid into `index.html`, between marker comments:
+That rewrites all 25 pages, regenerates `businesses/index.html`, and injects the
+card grid into `index.html`, between marker comments:
 
 ```html
-<!-- businesses:menu ... -->   <!-- businesses:grid ... -->
+<!-- businesses:grid ... -->   <!-- /businesses:grid -->
 ```
 
 **Don't hand-edit inside those markers** — the next run overwrites them. The
@@ -134,11 +135,13 @@ runtime, nothing to keep warm.
 ```
 Demo/
 ├── index.html          showcase / "Your Future Website"
-├── styles.css          design system: showcase, nav menu, business grid
+├── styles.css          design system: showcase, business cards, picker page
 ├── app.js              reveals, sticky header, headline, preview scaling,
-│                       deferred previews, the Businesses menu, card filters
+│                       deferred previews, picker search, card filters
 ├── businesses.mjs      the prospect list: 25 businesses, themes, trade defaults
-├── build-sites.mjs     generator for the 25 pages + the showcase injections
+├── build-sites.mjs     generator for the 25 pages, the picker page and the
+│                       showcase card grid
+├── businesses/         the picker page (generated)
 ├── demo-site.css       shared stylesheet for every demo page, incl. the variants
 ├── demo-site.js        reveals, sticky bar, scrolling strip, sample form
 ├── vercel.json         static deploy config
@@ -153,9 +156,11 @@ Demo/
   are built *after* their card comes near the viewport — a tinted placeholder
   frame stands in until then — so the showcase never fires 25 page loads at once.
   The iframes are inert (no pointer events, not focusable).
-- **The Businesses menu** opens on hover for pointer users and on click for touch
-  and keyboard, closes on Escape or a click outside, and reports `aria-expanded`.
-  Below 760px it becomes a fixed, scrollable sheet.
+- **The Businesses button is a link, not a dropdown.** Twenty-five names in a
+  menu inside a fixed header is a wall of text that shoves the page around on
+  narrow screens, so it goes to `businesses/` instead: full width, a line per
+  name, searchable as you type, and shareable as a URL. On a phone the header
+  keeps `Demos` and `Businesses` and drops the duplicate call to action.
 - **Animation** is CSS transitions plus `IntersectionObserver`; nothing animates
   on a timer and nothing blocks rendering.
 - **`prefers-reduced-motion`** is respected everywhere — reveals resolve to their

@@ -93,9 +93,11 @@ function initBackLink() {
   if (embedded) return;
 
   const link = document.createElement('a');
-  link.href = '../../#demos';
-  link.textContent = '← All the demos';
-  link.setAttribute('aria-label', 'Back to all the demos');
+  // The picker page, not an anchor on the showcase: it lists every business,
+  // which is the more useful place to land from a single demo.
+  link.href = '../../businesses/';
+  link.textContent = '← All the businesses';
+  link.setAttribute('aria-label', 'Back to all the businesses');
   Object.assign(link.style, {
     position: 'fixed',
     left: '20px',
