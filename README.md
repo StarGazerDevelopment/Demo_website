@@ -92,6 +92,46 @@ customers) to have that content rank in search results. **Delete that line from
 the generated pages if you want them indexed** — then remove it from the
 generator too, or the next build puts it back.
 
+## The owner-only profile panel
+
+The showcase top bar carries a **Profile** button that almost nobody will ever
+see. It is gated on the visitor's public IP:
+
+- The button is rendered `hidden` in `index.html` and only unhidden after
+  `app.js` confirms the public IP against `OWNER_IP`.
+- The panel itself lives in `profile.js`, which is **imported on demand** — so
+  the outreach copy is not in the served HTML and ordinary visitors never even
+  download it. On `localhost` the gate is skipped, for development.
+- The one IP lookup is deferred to idle time so it never delays first paint,
+  and the answer is cached for the session.
+
+The panel lists all **25 businesses**, each with a screenshot of its demo, the
+message written out with the business name and demo link filled in, and a
+**Copy text & image** button. Copying puts the picture, the rich text and the
+plain text on the clipboard in one go, so a paste carries the screenshot into
+an email or chat app and the plain text into a bare field.
+
+The screenshots are real captures of each demo, taken ahead of time with
+headless Chrome and committed under `assets/shots/` — the panel fetches nothing
+externally, and the images are lazy-loaded as the list scrolls.
+
+To change the message, edit the `script()` template in `profile.js`. To change
+who can see the panel, edit `OWNER_IP` in `app.js`. To refresh the screenshots,
+serve the folder and re-capture (see below).
+
+### Re-capturing the screenshots
+
+With the site served locally — say on port 4174 — and Chrome installed:
+
+```bash
+CHROME="/c/Program Files/Google/Chrome/Application/chrome.exe"
+for slug in $(ls sites); do
+  "$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1200,750 \
+    --force-device-scale-factor=0.8 --virtual-time-budget=5000 \
+    --screenshot="$(pwd -W)/assets/shots/$slug.png" "http://127.0.0.1:4174/sites/$slug/"
+done
+```
+
 ## Run it locally
 
 Any static file server works. From this folder:
@@ -144,6 +184,8 @@ Demo/
 ├── businesses/         the picker page (generated)
 ├── demo-site.css       shared stylesheet for every demo page, incl. the variants
 ├── demo-site.js        reveals, sticky bar, scrolling strip, sample form
+├── profile.js          owner-only outreach panel (imported on demand)
+├── assets/shots/       screenshots of each demo, for the profile panel
 ├── vercel.json         static deploy config
 ├── sites/              29 one-page sites (4 style directions + 25 businesses)
 └── assets/             generated SVG placeholders (no stock photos needed)
@@ -166,7 +208,8 @@ Demo/
 - **`prefers-reduced-motion`** is respected everywhere — reveals resolve to their
   final state and looping animations stop.
 - **Placeholder art is vector**, so it stays crisp at any size and the whole thing
-  ships in a few kilobytes.
+  ships in a few kilobytes. The panel screenshots are the one exception — real
+  PNGs, but only pulled in when the owner opens the panel.
 
 ## Swapping in real content
 

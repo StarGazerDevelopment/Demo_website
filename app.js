@@ -269,6 +269,50 @@ function initParallax() {
   window.addEventListener('resize', () => { readBases(); onScroll(); }, { passive: true });
 }
 
+/* ------------------------------------------------------------- owner profile */
+
+/* Deferred so the one lookup never competes with the first paint. */
+function scheduleProfile() {
+  if ('requestIdleCallback' in window) requestIdleCallback(initProfile, { timeout: 2500 });
+  else setTimeout(initProfile, 1200);
+}
+
+/* The profile button belongs to the site owner only. It stays hidden until the
+   visitor's public IP matches, and the panel module is imported on demand so
+   ordinary visitors never download it and the outreach copy is never in the
+   served HTML. On localhost the gate is skipped so the panel can be developed. */
+const OWNER_IP = '163.47.70.107';
+
+async function initProfile() {
+  const button = document.querySelector('[data-profile-open]');
+  if (!button) return;
+
+  const isLocal = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+  let allowed = isLocal;
+
+  if (!allowed) {
+    try {
+      // Cache per session: one lookup, then the gate is free to re-check.
+      let ip = sessionStorage.getItem('yfw:ip');
+      if (!ip) {
+        const response = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+        ip = (await response.json()).ip;
+        sessionStorage.setItem('yfw:ip', ip);
+      }
+      allowed = ip === OWNER_IP;
+    } catch {
+      allowed = false;
+    }
+  }
+
+  if (!allowed) return;
+  button.hidden = false;
+
+  import('./profile.js')
+    .then((module) => module.init(button))
+    .catch(() => { button.hidden = true; });
+}
+
 /* -------------------------------------------------------- marquee duplicating */
 
 function initMarquee() {
@@ -291,6 +335,7 @@ function init() {
   initPickerSearch();
   initBizFilters();
   initParallax();
+  scheduleProfile();
 }
 
 if (document.readyState === 'loading') {

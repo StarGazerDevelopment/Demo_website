@@ -719,11 +719,9 @@ h1, h2, h3, p { margin-top: 0; }
 
 @media (max-width: 1000px) {
   .gallery--biz { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-}
-
-@media (max-width: 760px) {
-  /* Keep the route to the businesses on a phone: the two links stay, the
-     duplicate call to action goes — it is repeated in the hero anyway. */
+}@media (max-width: 760px) {
+  /* Keep the route to the businesses on a phone: the two links stay,
+     the duplicate call to action goes — it is repeated in the hero anyway. */
   .site-nav { gap: 16px; }
   .site-nav a:not(.btn) { display: inline; }
   .site-nav a.site-nav__link--minor { display: none; }
@@ -733,4 +731,119 @@ h1, h2, h3, p { margin-top: 0; }
   .picker-hero { padding-top: 126px; }
   .picker__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .gallery--biz { grid-template-columns: minmax(0, 1fr); }
+
+  /* The profile button stays on a phone — it is the whole point of the gate. */
+  .site-nav .profile-btn { display: inline-flex; padding: 10px 15px; font-size: 13px; }
+}
+
+/* ------------------------------------------------------- owner profile panel */
+
+/* The button is injected hidden and unhidden only once the IP gate passes. */
+.profile-btn[hidden] { display: none; }
+
+html.profile-open { overflow: hidden; }
+
+.profile {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  justify-items: end;
+}
+.profile[hidden] { display: none; }
+
+.profile__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(36, 30, 22, 0.42);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-soft);
+}
+.profile.is-open .profile__scrim { opacity: 1; }
+
+.profile__sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(620px, 100%);
+  height: 100%;
+  background: var(--cream-50);
+  border-left: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(100%);
+  transition: transform 0.5s var(--ease-soft);
+}
+.profile.is-open .profile__sheet { transform: translateX(0); }
+
+.profile__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 26px 20px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(249, 244, 234, 0.86);
+  backdrop-filter: blur(12px);
+}
+.profile__title { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 10px 0 6px; }
+.profile__note { margin: 0; color: var(--muted); font-size: 13px; }
+.profile__close { flex: none; padding: 10px 18px; font-size: 13px; }
+
+.profile__list {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 26px 40px;
+  display: grid;
+  gap: 26px;
+}
+
+.profile__card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(168deg, rgba(255, 255, 255, 0.82), rgba(253, 251, 246, 0.5));
+  box-shadow: var(--shadow-sm);
+}
+
+.profile__shot {
+  display: block;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: var(--cream-100);
+}
+.profile__shot img { width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; object-position: top; }
+
+.profile__body { display: grid; gap: 8px; }
+.profile__name { font-size: 17px; font-weight: 650; letter-spacing: -0.01em; margin: 0; }
+.profile__link { margin: 0; color: var(--accent-deep); font-size: 12.5px; font-weight: 650; letter-spacing: 0.01em; }
+.profile__text {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.profile__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+.profile__copy { padding: 12px 20px; font-size: 13px; }
+.profile__copy[disabled] { opacity: 0.75; cursor: default; transform: none; box-shadow: none; }
+.profile__visit { color: var(--accent-deep); font-size: 13px; font-weight: 650; text-decoration: none; }
+.profile__visit:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .profile__sheet { width: 100%; border-left: 0; }
+  .profile__head { padding: 20px 18px 16px; }
+  .profile__list { padding: 18px 18px 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile__scrim,
+  .profile__sheet { transition: none; }
+  .profile__sheet { transform: none; }
 }
