@@ -221,9 +221,11 @@ export function init(button) {
   const close = () => {
     panel.classList.remove("is-open");
     document.documentElement.classList.remove("profile-open");
+    // Hidden only if it is still shut when the slide finishes — otherwise a
+    // reopen within that window would be undone by this cleanup.
     const done = () => {
-      panel.hidden = true;
       panel.removeEventListener("transitionend", done);
+      if (!panel.classList.contains("is-open")) panel.hidden = true;
     };
     panel.addEventListener("transitionend", done);
     setTimeout(done, 400);
@@ -232,8 +234,32 @@ export function init(button) {
 
   button.addEventListener("click", open);
   closeButtons.forEach((el) => el.addEventListener("click", close));
+
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !panel.hidden) close();
+    if (panel.hidden) return;
+
+    if (event.key === "Escape") {
+      close();
+      return;
+    }
+
+    // The sheet is a modal dialog, so Tab stays inside it. Hidden cards drop
+    // out of the list because their boxes have no offsetParent.
+    if (event.key !== "Tab") return;
+    const focusable = [...sheet.querySelectorAll("a[href], button:not([disabled]), input")].filter(
+      (el) => el.offsetParent !== null,
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   /* Search and trade filtering, mirroring the showcase's picker and chips. */

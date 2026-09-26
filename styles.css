@@ -732,8 +732,17 @@ h1, h2, h3, p { margin-top: 0; }
   .picker__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .gallery--biz { grid-template-columns: minmax(0, 1fr); }
 
-  /* The profile button stays on a phone — it is the whole point of the gate. */
-  .site-nav .profile-btn { display: inline-flex; padding: 10px 15px; font-size: 13px; }
+  /* The profile button stays on a phone — it is the whole point of the gate —
+     but drops its label so the header keeps its width. */
+  .site-nav .profile-btn { display: inline-flex; padding: 10px 12px; font-size: 13px; }
+  .profile-btn__label { display: none; }
+}
+
+/* Very narrow phones: the Demos link is repeated in the hero, so it goes and
+   the header stops overflowing the shell. */
+@media (max-width: 380px) {
+  .site-nav { gap: 12px; }
+  .site-nav a.site-nav__link[href="#demos"] { display: none; }
 }
 
 /* ------------------------------------------------------- owner profile panel */
@@ -747,8 +756,9 @@ html.profile-open { overflow: hidden; }
   position: fixed;
   inset: 0;
   z-index: 120;
-  display: grid;
-  justify-items: end;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
 }
 .profile[hidden] { display: none; }
 
@@ -768,6 +778,7 @@ html.profile-open { overflow: hidden; }
   flex-direction: column;
   width: min(620px, 100%);
   height: 100%;
+  max-height: 100%;
   background: var(--cream-50);
   border-left: 1px solid var(--line);
   box-shadow: var(--shadow-lg);
@@ -791,7 +802,10 @@ html.profile-open { overflow: hidden; }
 .profile__close { flex: none; padding: 10px 18px; font-size: 13px; }
 
 .profile__list {
-  flex: 1;
+  flex: 1 1 auto;
+  /* A flex child will not shrink below its content without this, which is
+     exactly what stopped the list from scrolling. */
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 22px 26px 40px;
