@@ -799,6 +799,22 @@ html.profile-open { overflow: hidden; }
   gap: 26px;
 }
 
+.profile__tools {
+  display: grid;
+  gap: 14px;
+  padding: 18px 26px 20px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.42);
+}
+.profile__tools .picker-search__field { flex: none; max-width: none; }
+.profile__filters { margin-bottom: 0; }
+.profile__count { margin: 0; color: var(--muted); font-size: 13px; }
+.profile__empty { margin: 4px 0 0; color: var(--muted); }
+.profile__empty[hidden] { display: none; }
+
+/* Cards carry `display: grid`, so hiding needs to be explicit. */
+.profile__card[hidden] { display: none; }
+
 .profile__card {
   display: grid;
   gap: 14px;
@@ -839,6 +855,7 @@ html.profile-open { overflow: hidden; }
 @media (max-width: 760px) {
   .profile__sheet { width: 100%; border-left: 0; }
   .profile__head { padding: 20px 18px 16px; }
+  .profile__tools { padding: 16px 18px 18px; }
   .profile__list { padding: 18px 18px 34px; }
 }
 
